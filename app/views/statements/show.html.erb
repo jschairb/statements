@@ -36,15 +36,42 @@
       
       <h2>Items</h2>
 
-      <% @statement.line_items.each do |line_item| -%>
-        <p><%= h line_item.description %></p>
-      <% end -%>
+      <% form_for :line_item, :url => statement_line_items_path(@statement), 
+           :html => { :class => :form } do |f| -%>
+        <table class="table">
+          <tr>
+            <th class="first">ID</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th class="last">Cost</th>
+          </tr>
+  
+          <% @statement.line_items.each do |line_item| -%>
+            <tr class="<%= cycle("odd", "even") %>">
+              <td><%= h line_item.id %></td>
+              <td><%= h line_item.description %></td>
+              <td><%= h line_item.quantity %></td>
+              <td><%= number_to_currency line_item.price %></td>
+              <td><%= number_to_currency line_item.cost %></td>
+            </tr>
+          <% end -%>
 
-      <% form_for :line_item, :url => statement_line_items_path(@statement), :html => { :class => :form } do |f| -%>
-        <%= render :partial => "line_items/form", :locals => { :f => f} %>
-        
+          <tr>
+            <td class="first">&nbsp;</td>
+            <td><%= f.text_field :description, :class => 'text_field' %></td>
+            <td><%= f.text_field :quantity, :class => 'text_field' %></td>
+            <td><%= f.text_field :price, :class => 'text_field' %></td>
+            <td>  
+              <button class="button" type="submit">
+                <%= image_tag("web-app-theme/tick.png", 
+                              :alt => "#{t("web-app-theme.save", :default => "Create")}") %> 
+                Create
+              </button>  
+            </td>
+          </tr>
+        </table>
       <% end-%>
-      
     </div>
   </div>
 </div>
