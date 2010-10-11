@@ -1,0 +1,42 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first active"><%= link_to "List", statements_path  %></li>
+      <li><%= link_to "New", new_statement_path %></li>
+    </ul>
+  </div>          
+  <div class="content">          
+    <h2 class="title">All Statements</h2>
+    <div class="inner">
+      <table class="table">
+        <tr>             
+          <th class="first">ID</th>
+          <th>Recipient</th>
+          <th>Issue Date</th>
+          <th class="last">&nbsp;</th>
+        </tr>
+        <% @statements.each do |statement| -%>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td><%= statement.number %></td>
+          <td><%= link_to statement.recipient_name, statement_path(statement) %></td>
+          <td>
+            <%= statement.issue_date.to_s(:invoice) %>
+          </td>
+          <td class="last">
+            <%= link_to "Edit", edit_statement_path(statement) %> |
+            <%= link_to "Del", statement_path(statement), :method => :delete, 
+                :confirm => "Are you sure? This will delete this statement and all associated line items." %>
+          </td>
+        </tr>          
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions">
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

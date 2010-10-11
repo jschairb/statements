@@ -1,0 +1,52 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "List", statements_path  %></li>
+      <li><%= link_to "New", new_statement_path %></li>
+      <li class="active"><%= link_to "Show", statement_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <h2 class="title">#<%= h @statement.number %></h2>
+    <div class="inner">
+
+        <p>
+          <b>Start Date:</b>
+          <%= @statement.start_date %>
+        </p>
+
+        <p>
+          <b>End Date:</b>
+          <%= @statement.end_date %>
+        </p>
+
+        <p>
+          <b>Issue Date:</b>
+          <%= @statement.issue_date %>
+        </p>
+
+      <div class="wat-cf">
+        <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "Edit")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_statement_path(@statement), :class => "button" %> 
+        <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}")} #{t("web-app-theme.delete", :default => "Delete")}", statement_path(@statement), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+      </div>      
+
+      <h2>Recipient</h2>
+      <p><%= h @statement.recipient.name %></p>
+      
+      
+      <h2>Items</h2>
+
+      <% @statement.line_items.each do |line_item| -%>
+        <p><%= h line_item.description %></p>
+      <% end -%>
+
+      <% form_for :line_item, :url => statement_line_items_path(@statement), :html => { :class => :form } do |f| -%>
+        <%= render :partial => "line_items/form", :locals => { :f => f} %>
+        
+      <% end-%>
+      
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

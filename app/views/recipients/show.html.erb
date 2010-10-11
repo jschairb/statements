@@ -1,0 +1,54 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", recipients_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_recipient_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.show", :default => "Show")}", recipient_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      
+        <p>
+          <b><%= t("activerecord.attributes.recipient.address", :default => t("activerecord.labels.address", :default => "Address")) %>:</b>
+          <%= @recipient.address %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.recipient.addl_address", :default => t("activerecord.labels.addl_address", :default => "Addl address")) %>:</b>
+          <%= @recipient.addl_address %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.recipient.city", :default => t("activerecord.labels.city", :default => "City")) %>:</b>
+          <%= @recipient.city %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.recipient.contact", :default => t("activerecord.labels.contact", :default => "Contact")) %>:</b>
+          <%= @recipient.contact %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.recipient.name", :default => t("activerecord.labels.name", :default => "Name")) %>:</b>
+          <%= @recipient.name %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.recipient.state", :default => t("activerecord.labels.state", :default => "State")) %>:</b>
+          <%= @recipient.state %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.recipient.zip", :default => t("activerecord.labels.zip", :default => "Zip")) %>:</b>
+          <%= @recipient.zip %>
+        </p>
+      <div class="wat-cf">
+        <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_recipient_path(@recipient), :class => "button" %> 
+        <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}")} #{t("web-app-theme.delete", :default => "Delete")}", recipient_path(@recipient), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+      </div>      
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

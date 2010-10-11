@@ -1,0 +1,76 @@
+<div class="columns wat-cf">
+  <div class="column left">
+    <div class="group">
+      <%= f.label :number, "Number", :class => :label %>
+      <%= f.text_field :number, :class => 'text_field' %>
+    </div>
+
+    <div class="group">
+      <%= f.label :issue_date, "Issue Date", :class => :label %>
+      <%= f.date_select :issue_date, :class => 'date_select', :order => [ :month, :day, :year ] %>
+    </div>
+
+    <div class="group">
+      <%= f.label :start_date, "Start Date", :class => :label %>
+      <%= f.date_select :start_date, :class => 'date_select', :order => [ :month, :day, :year ] %>
+    </div>
+    
+    <div class="group">
+      <%= f.label :end_date, "End Date", :class => :label %>
+      <%= f.date_select :end_date, :class => 'date_select', :order => [ :month, :day, :year ] %>
+    </div>
+  </div>
+
+  <div class="column right">
+
+    <% fields_for "statement[recipient_attributes]" do |r| -%>
+      <div class="group">
+        <%= r.label :name, "Name", :class => :label %>
+        <%= r.text_field :name, :class => 'text_field' %>
+        <span class="description">Ex: Pete's Fleets</span>
+      </div>
+  
+      <div class="group">
+        <%= r.label :contact, "Contact", :class => :label %>
+        <%= r.text_field :contact, :class => 'text_field' %>
+        <span class="description">Ex: Peter Parker</span>
+      </div>
+
+      <div class="group">
+        <%= r.label :address, "Address", :class => :label %>
+        <%= r.text_field :address, :class => 'text_field' %>
+      </div>
+
+      <div class="group">
+        <%= r.label :addl_address, "Additional Address", :class => :label %>
+        <%= r.text_field :addl_address, :class => 'text_field' %>
+      </div>
+
+      <div class="group">
+        <%= r.label :city, "City", :class => :label %>
+        <%= r.text_field :city, :class => 'text_field' %>
+      </div>
+
+      <div class="group">
+        <%= r.label :state, "State", :class => :label %>
+        <%= r.text_field :state, :class => 'text_field' %>
+      </div>
+  
+      <div class="group">
+        <%= r.label :zip, "Zip", :class => :label %>
+        <%= r.text_field :zip, :class => 'text_field' %>
+      </div>
+  <% end -%>
+
+</div>
+
+</div>
+
+<div class="group navform wat-cf">
+  <button class="button" type="submit">
+    <%= image_tag("web-app-theme/tick.png", :alt => "Save") %> Save
+  </button>
+  <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "Cancel")} Cancel", 
+      statements_path, :class => "button" %> 
+</div>
+
