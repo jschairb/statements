@@ -25,6 +25,11 @@
           <%= @statement.issue_date %>
         </p>
 
+        <p>
+          <b>Total Cost:</b>
+          <%= number_to_currency @statement.total_cost %>
+        </p>
+
       <div class="wat-cf">
         <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "Edit")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_statement_path(@statement), :class => "button" %> 
         <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}")} #{t("web-app-theme.delete", :default => "Delete")}", statement_path(@statement), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
@@ -64,8 +69,7 @@
             <td><%= f.text_field :price, :class => 'text_field' %></td>
             <td>  
               <button class="button" type="submit">
-                <%= image_tag("web-app-theme/tick.png", 
-                              :alt => "#{t("web-app-theme.save", :default => "Create")}") %> 
+                <%= image_tag("web-app-theme/tick.png", :alt => "Create") %> 
                 Create
               </button>  
             </td>

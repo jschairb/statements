@@ -12,6 +12,7 @@
         <tr>             
           <th class="first">ID</th>
           <th>Recipient</th>
+          <th>Total</th>
           <th>Issue Date</th>
           <th class="last">&nbsp;</th>
         </tr>
@@ -19,9 +20,9 @@
         <tr class="<%= cycle("odd", "even") %>">
           <td><%= statement.number %></td>
           <td><%= link_to statement.recipient_name, statement_path(statement) %></td>
-          <td>
-            <%= statement.issue_date.to_s(:invoice) %>
-          </td>
+          <td><%= number_to_currency statement.total_cost %></td>
+              
+          <td><%= statement.issue_date.to_s(:invoice) %></td>
           <td class="last">
             <%= link_to "Edit", edit_statement_path(statement) %> |
             <%= link_to "Del", statement_path(statement), :method => :delete, 

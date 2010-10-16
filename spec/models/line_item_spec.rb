@@ -23,6 +23,23 @@ describe LineItem do
     line_item.cost.should == 10.00
   end
 
+  it "adds to the statement total when saved" do
+    statement = Factory.create(:statement)
+    statement.reload.total_cost.should == 0.0
+    line_item = Factory.create(:line_item, :statement => statement)
+    statement.reload.total_cost.should == line_item.cost
+  end
+
+  it "subtracts to the statement total when destroyed" do
+    statement = Factory.create(:statement)
+    line_item = Factory.create(:line_item, :statement => statement)
+    statement.reload.line_items.should == [line_item]
+
+    expected = (statement.reload.total_cost - line_item.cost)
+    line_item.destroy
+    statement.reload.total_cost.should == expected
+  end
+
   describe "validations" do
     it "requires a description" do
       line_item = Factory.build(:line_item, :description => nil)

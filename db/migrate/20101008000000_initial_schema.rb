@@ -29,6 +29,7 @@ class InitialSchema < ActiveRecord::Migration
       t.integer :number
       t.integer :recipient_id
       t.date    :start_date
+      t.float   :total_cost, :default => 0.0
 
       t.timestamps
     end
